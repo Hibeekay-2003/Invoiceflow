@@ -827,8 +827,8 @@ window.viewDoc = function(id, type) {
 ───────────────────────────────────────────── */
 function renderDashboard(vc) {
   const s = getDashboardStats();
-  const recentInv  = [...state.invoices].slice(0,5);
-  const recentQuot = [...state.quotations].slice(0,5);
+  const recentInv  = [...state.invoices].slice(0,3);
+  const recentQuot = [...state.quotations].slice(0,3);
 
   const invRows = recentInv.map(i => `<tr>
     <td><span class="doc-number-chip">${esc(i.number)}</span></td>
