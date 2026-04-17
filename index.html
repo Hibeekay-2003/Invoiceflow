@@ -105,6 +105,33 @@
 <!-- ===== MOBILE SIDEBAR BACKDROP ===== -->
 <div id="mobile-nav-overlay"></div>
 
+  <!-- ===== FIREBASE (Firestore cloud database) ===== -->
+  <!-- Step 1: Load Firebase compat SDK from CDN (no install needed) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+  <!-- Step 2: Replace the values below with YOUR Firebase project config.
+       Get these from: Firebase Console → Project Settings → General → Your Apps → SDK setup
+       IMPORTANT: Do NOT leave the placeholder values – the app will not save data until you fill these in. -->
+  <script>
+    
+const firebaseConfig = {
+  apiKey: "AIzaSyC3YOkg_HsJASxE-GIVQI49cZwYr4m97fg",
+  authDomain: "invoiceflow-a2120.firebaseapp.com",
+  projectId: "invoiceflow-a2120",
+  storageBucket: "invoiceflow-a2120.firebasestorage.app",
+  messagingSenderId: "319188581617",
+  appId: "1:319188581617:web:0653ed97bff5f7c44bfd50"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+    };
+    firebase.initializeApp(firebaseConfig);
+    window.db = firebase.firestore();
+  </script>
+
 <script src="app.js"></script>
+
 </body>
 </html>

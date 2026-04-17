@@ -1,36 +1,36 @@
 /* ============================================================
    InvoiceFlow – app.js
    Full SPA: Dashboard | Invoices | Quotations | Items | Settings
-   Persistence: server-side data.json via REST API
+   Persistence: Firebase Firestore (cloud, always-on, free)
    ============================================================ */
 
 'use strict';
 
 /* ─────────────────────────────────────────────
-   1. SERVER STORAGE HELPERS
+   1. FIREBASE / FIRESTORE STORAGE HELPERS
+   `window.db` is set in index.html before this
+   script loads (Firebase compat SDK).
 ───────────────────────────────────────────── */
 
-/* Push the entire relevant state to the server (fire & forget) */
-function persist(/*key – kept for API compat, ignored*/) {
-  fetch('/api/data', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      invoices:   state.invoices,
-      quotations: state.quotations,
-      items:      state.items,
-      settings:   state.settings,
-      counters:   state.counters,
-    }),
+const FS_DOC = () => window.db.collection('invoiceflow').doc('appState');
+
+/* Push the entire state to Firestore (fire & forget) */
+function persist(/*key – kept for compat, ignored*/) {
+  FS_DOC().set({
+    invoices:   state.invoices,
+    quotations: state.quotations,
+    items:      state.items,
+    settings:   state.settings,
+    counters:   state.counters,
   }).catch(e => console.warn('[InvoiceFlow] save failed:', e));
 }
 
-/* Load all data from server, merge into state */
+/* Load all data from Firestore, merge into state */
 async function fetchState() {
   try {
-    const res  = await fetch('/api/data');
-    if (!res.ok) throw new Error(res.status);
-    const data = await res.json();
+    const snap = await FS_DOC().get();
+    if (!snap.exists) return;          // First run — no data yet
+    const data = snap.data();
     state.invoices   = data.invoices   || [];
     state.quotations = data.quotations || [];
     state.items      = data.items      || [];
@@ -40,6 +40,41 @@ async function fetchState() {
     console.warn('[InvoiceFlow] load failed (using defaults):', e);
   }
 }
+
+/* ── One-time data migration: import a local data.json into Firestore ── */
+window.importDataFromJSON = function() {
+  const input = document.createElement('input');
+  input.type = 'file'; input.accept = '.json';
+  input.onchange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    try {
+      const text = await file.text();
+      const data = JSON.parse(text);
+      const safe = {
+        invoices:   Array.isArray(data.invoices)   ? data.invoices   : [],
+        quotations: Array.isArray(data.quotations) ? data.quotations : [],
+        items:      Array.isArray(data.items)      ? data.items      : [],
+        settings:   data.settings  || DEFAULT_SETTINGS,
+        counters:   data.counters  || { nextInvoice: 1, nextQuotation: 1 },
+      };
+      await FS_DOC().set(safe);
+      // Reload state from what we just wrote
+      state.invoices   = safe.invoices;
+      state.quotations = safe.quotations;
+      state.items      = safe.items;
+      state.settings   = Object.assign({}, DEFAULT_SETTINGS, safe.settings);
+      state.counters   = safe.counters;
+      document.getElementById('sidebar-company-name').textContent = state.settings.company || 'Your Company';
+      toast(`✅ Imported ${safe.invoices.length} invoices, ${safe.quotations.length} quotations, ${safe.items.length} items.`, 'success');
+      renderView(state.currentView);
+    } catch(err) {
+      toast('Import failed: ' + err.message, 'error');
+      console.error(err);
+    }
+  };
+  input.click();
+};
 
 /* ─────────────────────────────────────────────
    2. STATE  (populated async from server on load)
@@ -1155,6 +1190,22 @@ function renderSettingsView(vc, ta) {
         </div>
       </div>
     </div>
+
+    <div class="card">
+      <h3 style="font-size:0.95rem;font-weight:700;margin-bottom:16px">Data Management</h3>
+      <p style="font-size:0.83rem;color:var(--text-secondary);margin-bottom:16px">Import your old <code style="background:rgba(255,255,255,0.06);padding:1px 5px;border-radius:4px">data.json</code> to migrate existing data. Export creates a local backup of all your cloud data.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn btn-secondary" id="btn-import-data" onclick="importDataFromJSON()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;margin-right:6px;vertical-align:-2px"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Import data.json
+        </button>
+        <button class="btn btn-ghost" id="btn-export-data" onclick="exportDataToJSON()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px;margin-right:6px;vertical-align:-2px"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export Backup
+        </button>
+      </div>
+    </div>
+
   </div>`;
 
   // Logo file input handler
@@ -1224,6 +1275,23 @@ window.clearAppData = function() {
   toast('All data cleared (settings preserved).', 'success');
   renderView(state.currentView);
 };
+
+window.exportDataToJSON = function() {
+  const payload = {
+    invoices:   state.invoices,
+    quotations: state.quotations,
+    items:      state.items,
+    settings:   state.settings,
+    counters:   state.counters,
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = Object.assign(document.createElement('a'), { href: url, download: `invoiceflow-backup-${new Date().toISOString().slice(0,10)}.json` });
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+  toast('Backup downloaded!', 'success');
+};
+
 
 /* ─────────────────────────────────────────────
    20. FILTER HELPER
