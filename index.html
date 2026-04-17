@@ -114,16 +114,24 @@
        Get these from: Firebase Console → Project Settings → General → Your Apps → SDK setup
        IMPORTANT: Do NOT leave the placeholder values – the app will not save data until you fill these in. -->
   <script>
-    
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyC3YOkg_HsJASxE-GIVQI49cZwYr4m97fg",
   authDomain: "invoiceflow-a2120.firebaseapp.com",
+  databaseURL: "https://invoiceflow-a2120-default-rtdb.firebaseio.com",
   projectId: "invoiceflow-a2120",
   storageBucket: "invoiceflow-a2120.firebasestorage.app",
   messagingSenderId: "319188581617",
   appId: "1:319188581617:web:0653ed97bff5f7c44bfd50"
 };
 
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
     };
