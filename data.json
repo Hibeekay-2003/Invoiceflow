@@ -1,0 +1,375 @@
+{
+  "invoices": [
+    {
+      "date": "2026-04-17",
+      "dueDate": "2026-05-17",
+      "status": "draft",
+      "client": {
+        "name": "Guaranty Trust Bank",
+        "email": "",
+        "address": "Plot 1669, Oyin Jolayemi St,\nVicroria Island, Lagos 106104,\nLagos Nigeria"
+      },
+      "lineItems": [
+        {
+          "itemId": "",
+          "description": "Supply and Installation of Electrical items @Orile (VAT Inclusive)",
+          "name": "Supply and Installation of Electrical items @Orile (VAT Inclusive)",
+          "unit": "1",
+          "qty": 1,
+          "unitPrice": 120000,
+          "total": 120000
+        }
+      ],
+      "taxRate": 0,
+      "subtotal": 120000,
+      "tax": 0,
+      "total": 120000,
+      "notes": "Thank you for your business!",
+      "updatedAt": "2026-04-17T06:01:41.728Z",
+      "id": "mo2i37ttedfb9kwlxl",
+      "number": "INV-0006",
+      "createdAt": "2026-04-17T06:01:41.728Z"
+    },
+    {
+      "date": "2026-03-19",
+      "dueDate": "2026-04-18",
+      "status": "sent",
+      "client": {
+        "name": "Guaranty Trust Bank",
+        "email": "",
+        "address": "Plot 1669, Oyin Jolayemi St,\nVictoria Island, Lagos 106104,\nLagos Nigeria"
+      },
+      "lineItems": [
+        {
+          "itemId": "",
+          "description": "Supply and Installation of Electrical Items @ Lawanson (VAT Inclusive)",
+          "name": "Supply and Installation of Electrical Items @ Lawanson (VAT Inclusive)",
+          "unit": "1",
+          "qty": 1,
+          "unitPrice": 90000,
+          "total": 90000
+        }
+      ],
+      "taxRate": 0,
+      "subtotal": 90000,
+      "tax": 0,
+      "total": 90000,
+      "notes": "Thank you for your business!",
+      "updatedAt": "2026-03-19T06:44:05.230Z",
+      "id": "mmx3u12mr4mm89u031",
+      "number": "INV-0005",
+      "createdAt": "2026-03-19T06:44:05.230Z"
+    },
+    {
+      "date": "2026-03-19",
+      "dueDate": "2026-04-18",
+      "status": "sent",
+      "client": {
+        "name": "Guaranty Trust Bank",
+        "email": "",
+        "address": "Plot 1669, Oyin Jolayemi St,\nVictoria Island, Lagos 106104,\nLagos Nigeria"
+      },
+      "lineItems": [
+        {
+          "itemId": "",
+          "description": "Supply and Installation of Electrical Items @ Asaba 1 and 2 (VAT Inclusive)",
+          "name": "Supply and Installation of Electrical Items @ Asaba 1 and 2 (VAT Inclusive)",
+          "unit": "1",
+          "qty": 1,
+          "unitPrice": 430000,
+          "total": 430000
+        }
+      ],
+      "taxRate": 0,
+      "subtotal": 430000,
+      "tax": 0,
+      "total": 430000,
+      "notes": "Thank you for your business!",
+      "updatedAt": "2026-03-19T06:42:51.358Z",
+      "id": "mmx3s9p1bh9sff1glv7",
+      "number": "INV-0004",
+      "createdAt": "2026-03-19T06:42:43.093Z"
+    },
+    {
+      "date": "2026-03-19",
+      "dueDate": "2026-04-18",
+      "status": "sent",
+      "client": {
+        "name": "Guaranty Trust Bank",
+        "email": "",
+        "address": "Plot 1669, Oyin Jolayemi St,\nVictoria Island, Lagos 106104,\nLagos Nigeria"
+      },
+      "lineItems": [
+        {
+          "itemId": "",
+          "description": "Supply and Installation of Electrical Items @ Okota (VAT Inclusive)",
+          "name": "Supply and Installation of Electrical Items @ Okota (VAT Inclusive)",
+          "unit": "1",
+          "qty": 1,
+          "unitPrice": 43000,
+          "total": 43000
+        }
+      ],
+      "taxRate": 0,
+      "subtotal": 43000,
+      "tax": 0,
+      "total": 43000,
+      "notes": "Thank you for your business!",
+      "updatedAt": "2026-03-19T06:41:26.150Z",
+      "id": "mmx3qmbqqmr7m33idy",
+      "number": "INV-0003",
+      "createdAt": "2026-03-19T06:41:26.150Z"
+    },
+    {
+      "date": "2026-03-19",
+      "dueDate": "2026-04-18",
+      "status": "sent",
+      "client": {
+        "name": "Guaranty Trust Bank",
+        "email": "",
+        "address": "Plot 1669, Oyin Jolayemi St,\nVictoria Island, Lagos 106104,\nLagos Nigeria"
+      },
+      "lineItems": [
+        {
+          "itemId": "",
+          "description": "Supply and Installation of 600x600 LED Light @ LASPOTECH (VAT Inclusive)",
+          "name": "Supply and Installation of 600x600 LED Light @ LASPOTECH (VAT Inclusive)",
+          "unit": "1",
+          "qty": 1,
+          "unitPrice": 200000,
+          "total": 200000
+        }
+      ],
+      "taxRate": 0,
+      "subtotal": 200000,
+      "tax": 0,
+      "total": 200000,
+      "notes": "Thank you for your business!",
+      "updatedAt": "2026-03-19T06:39:58.839Z",
+      "id": "mmx3oqyf3v4mf6ng5nj",
+      "number": "INV-0002",
+      "createdAt": "2026-03-19T06:39:58.839Z"
+    },
+    {
+      "date": "2026-03-19",
+      "dueDate": "2026-04-18",
+      "status": "sent",
+      "client": {
+        "name": "Guaranty Trust Bank",
+        "email": "",
+        "address": "Plot 1669, Oyin Jolayemi St,\nVictoria Island, Lagos 106104,\nLagos Nigeria"
+      },
+      "lineItems": [
+        {
+          "itemId": "",
+          "description": "Supply and Installation of 600x600 LED Lights @Ikorodu 1 (VAT inclusive)",
+          "name": "Supply and Installation of 600x600 LED Lights @Ikorodu 1 (VAT inclusive)",
+          "unit": "1",
+          "qty": 1,
+          "unitPrice": 180000,
+          "total": 180000
+        }
+      ],
+      "taxRate": 0,
+      "subtotal": 180000,
+      "tax": 0,
+      "total": 180000,
+      "notes": "Thank you for your business!",
+      "updatedAt": "2026-03-19T06:44:17.591Z",
+      "id": "mmx3leowq06sodathr7",
+      "number": "INV-0001",
+      "createdAt": "2026-03-19T06:37:22.976Z"
+    }
+  ],
+  "quotations": [
+    {
+      "date": "2026-04-17",
+      "expiryDate": "2026-05-17",
+      "status": "draft",
+      "client": {
+        "name": "Guaranty Trust Bank",
+        "email": "",
+        "address": "Plot 1669, Oyin Jolayemi St,\nVicroria Island, Lagos 106104,\nLagos Nigeria"
+      },
+      "lineItems": [
+        {
+          "itemId": "",
+          "description": "24 Watts Recess Light",
+          "name": "24 Watts Recess Light",
+          "unit": "1",
+          "qty": 10,
+          "unitPrice": 16000,
+          "total": 160000
+        },
+        {
+          "itemId": "",
+          "description": "Labour and Logistics @ Omole Phase 2",
+          "name": "Labour and Logistics @ Omole Phase 2",
+          "unit": "1",
+          "qty": 1,
+          "unitPrice": 80000,
+          "total": 80000
+        }
+      ],
+      "taxRate": 7.5,
+      "subtotal": 240000,
+      "tax": 18000,
+      "total": 258000,
+      "notes": "Thank you for your business!",
+      "updatedAt": "2026-04-17T05:58:00.290Z",
+      "id": "mo2hygyqpo5a0agler",
+      "number": "QUO-0003",
+      "createdAt": "2026-04-17T05:58:00.290Z"
+    },
+    {
+      "date": "2026-03-19",
+      "expiryDate": "2026-04-18",
+      "status": "sent",
+      "client": {
+        "name": "Guaranty Trust Bank",
+        "email": "",
+        "address": "Plot 1669, Oyin Jolayemi St,\nVictoria Island, Lagos 106104,\nLagos Nigeria"
+      },
+      "lineItems": [
+        {
+          "itemId": "mmx3xckxtf1ydhgjv6",
+          "description": "18Inch Fan",
+          "name": "18Inch Fan",
+          "unit": "1",
+          "qty": 1,
+          "unitPrice": 150000,
+          "total": 150000
+        },
+        {
+          "itemId": "mmx3y03na1lw76nxfze",
+          "description": "Extension Socket",
+          "name": "Extension Socket",
+          "unit": "1",
+          "qty": 2,
+          "unitPrice": 18000,
+          "total": 36000
+        },
+        {
+          "itemId": "",
+          "description": "Delivery @ Okigwe Archive",
+          "name": "Delivery @ Okigwe Archive",
+          "unit": "1",
+          "qty": 1,
+          "unitPrice": 40000,
+          "total": 40000
+        }
+      ],
+      "taxRate": 7.5,
+      "subtotal": 226000,
+      "tax": 16950,
+      "total": 242950,
+      "notes": "Thank you for your business!",
+      "updatedAt": "2026-03-19T07:48:21.083Z",
+      "id": "mmx42vv01sglulja5a2",
+      "number": "QUO-0002",
+      "createdAt": "2026-03-19T06:50:58.380Z"
+    },
+    {
+      "date": "2026-03-19",
+      "expiryDate": "2026-04-18",
+      "status": "sent",
+      "client": {
+        "name": "Guaranty Trust Bank",
+        "email": "",
+        "address": "Plot 1669, Oyin Jolayemi St,\nVictoria Island, Lagos 106104,\nLagos Nigeria"
+      },
+      "lineItems": [
+        {
+          "itemId": "mmx3vc5op3x6qfhj9zi",
+          "description": "7AH DC Batteries",
+          "name": "7AH DC Batteries",
+          "unit": "1",
+          "qty": 2,
+          "unitPrice": 35000,
+          "total": 70000
+        },
+        {
+          "itemId": "mmx3wkvaw1t4p03vdag",
+          "description": "100AH Breaker",
+          "name": "100AH Breaker",
+          "unit": "1",
+          "qty": 1,
+          "unitPrice": 100000,
+          "total": 100000
+        },
+        {
+          "itemId": "",
+          "description": "Labour and Logistics @ Ikorodu 1",
+          "name": "Labour and Logistics @ Ikorodu 1",
+          "unit": "1",
+          "qty": 1,
+          "unitPrice": 80000,
+          "total": 80000
+        }
+      ],
+      "taxRate": 7.5,
+      "subtotal": 250000,
+      "tax": 18750,
+      "total": 268750,
+      "notes": "Thank you for your business!",
+      "updatedAt": "2026-03-19T06:51:20.606Z",
+      "id": "mmx40990pbsuzw1g1a",
+      "number": "QUO-0001",
+      "createdAt": "2026-03-19T06:48:55.764Z"
+    }
+  ],
+  "items": [
+    {
+      "name": "7AH DC Batteries",
+      "unit": "1",
+      "defaultPrice": 35000,
+      "description": "",
+      "updatedAt": "2026-03-19T06:45:06.252Z",
+      "id": "mmx3vc5op3x6qfhj9zi",
+      "createdAt": "2026-03-19T06:45:06.252Z"
+    },
+    {
+      "name": "100AH Breaker",
+      "unit": "1",
+      "defaultPrice": 100000,
+      "description": "",
+      "updatedAt": "2026-03-19T06:46:04.198Z",
+      "id": "mmx3wkvaw1t4p03vdag",
+      "createdAt": "2026-03-19T06:46:04.198Z"
+    },
+    {
+      "name": "18Inch Fan",
+      "unit": "1",
+      "defaultPrice": 150000,
+      "description": "",
+      "updatedAt": "2026-03-19T06:46:40.113Z",
+      "id": "mmx3xckxtf1ydhgjv6",
+      "createdAt": "2026-03-19T06:46:40.113Z"
+    },
+    {
+      "name": "Extension Socket",
+      "unit": "1",
+      "defaultPrice": 18000,
+      "description": "",
+      "updatedAt": "2026-03-19T06:47:10.595Z",
+      "id": "mmx3y03na1lw76nxfze",
+      "createdAt": "2026-03-19T06:47:10.595Z"
+    }
+  ],
+  "settings": {
+    "company": "Tera Techtonic Solutions",
+    "address": "16 Adebowale sebanjo street, Magodo, Lagos State",
+    "email": "",
+    "phone": "",
+    "currency": "₦",
+    "taxRate": 7.5,
+    "logo": "data:image/png;base64,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",
+    "footer": "Thank you for your business!",
+    "bankDetails": "ACCT NAME: TERA TECTONIC SOLUTIONS LTD\nACCT NUMBER: 0858337892",
+    "tin": "32263666-0001"
+  },
+  "counters": {
+    "nextInvoice": 7,
+    "nextQuotation": 4
+  }
+}
