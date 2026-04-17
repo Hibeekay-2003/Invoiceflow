@@ -1,0 +1,12 @@
+# Backup files
+data_backup_*.json
+
+# Temp write files
+*.tmp
+
+# Node modules (if ever added)
+node_modules/
+
+# OS junk
+.DS_Store
+Thumbs.db
