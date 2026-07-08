@@ -159,8 +159,8 @@ const server = http.createServer(async (req, res) => {
         tls: { rejectUnauthorized: false }
       });
 
-      // Require puppeteer inline in case it hasn't finished installing yet during boot
-      const puppeteer = require('puppeteer');
+      // Use dynamic import for Puppeteer since newer versions are ES Modules only
+      const puppeteer = (await import('puppeteer')).default;
       
       console.log('[InvoiceFlow] Launching Puppeteer to generate PDF...');
       const browser = await puppeteer.launch({
