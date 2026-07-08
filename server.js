@@ -165,7 +165,7 @@ const server = http.createServer(async (req, res) => {
       console.log('[InvoiceFlow] Launching Puppeteer to generate PDF...');
       const browser = await puppeteer.launch({
         headless: 'new',
-        args: ['--no-sandbox', '--disable-setuid-sandbox'] // required to launch in containerized hosts like Railway/Docker
+        args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'] // CRITICAL for Render/Docker to prevent memory hangs
       });
       const page = await browser.newPage();
       
@@ -199,8 +199,8 @@ const server = http.createServer(async (req, res) => {
       } catch (err) {}
 
       // Load HTML and wait for network/fonts
-      await page.setContent(fullHtml, { waitUntil: 'networkidle0' });
-      await page.emulateMediaType('print'); // matches the @media print rules in style.css that reveal .print-area
+      await page.setContent(fullHtml, { waitUntil: 'networkidle2', timeout: 60000 });
+      await page.emulateMediaType('print');
       
       
       console.log('[InvoiceFlow] Printing to PDF buffer...');
