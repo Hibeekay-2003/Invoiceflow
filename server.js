@@ -156,7 +156,10 @@ const server = http.createServer(async (req, res) => {
           user: smtp.user,
           pass: smtp.pass
         },
-        tls: { rejectUnauthorized: false }
+        tls: { rejectUnauthorized: false },
+        connectionTimeout: 15000, // 15 seconds max to connect
+        greetingTimeout: 15000,
+        socketTimeout: 15000
       });
 
       // Use dynamic import for Puppeteer since newer versions are ES Modules only
@@ -165,7 +168,8 @@ const server = http.createServer(async (req, res) => {
       console.log('[InvoiceFlow] Launching Puppeteer to generate PDF...');
       const browser = await puppeteer.launch({
         headless: 'new',
-        args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'] // CRITICAL for Render/Docker to prevent memory hangs
+        args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'], // CRITICAL for Render/Docker to prevent memory hangs
+        timeout: 15000 // 15 seconds max to launch
       });
       const page = await browser.newPage();
       
@@ -199,7 +203,7 @@ const server = http.createServer(async (req, res) => {
       } catch (err) {}
 
       // Load HTML and wait for network/fonts
-      await page.setContent(fullHtml, { waitUntil: 'networkidle2', timeout: 60000 });
+      await page.setContent(fullHtml, { waitUntil: 'load', timeout: 15000 }); // Wait max 15s for HTML
       await page.emulateMediaType('print');
       
       
@@ -207,7 +211,8 @@ const server = http.createServer(async (req, res) => {
       const pdfBuffer = await page.pdf({
         format: 'A4',
         printBackground: true,
-        margin: { top: '0', bottom: '0', left: '0', right: '0' }
+        margin: { top: '0', bottom: '0', left: '0', right: '0' },
+        timeout: 15000 // Wait max 15s to generate PDF
       });
       await browser.close();
 
