@@ -1,0 +1,16 @@
+{
+  "name": "invoiceflow",
+  "version": "1.0.0",
+  "description": "Invoice & Quotation Manager",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "nodemailer": "^9.0.3",
+    "puppeteer": "^25.3.0"
+  }
+}
