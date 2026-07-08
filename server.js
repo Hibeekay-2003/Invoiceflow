@@ -157,6 +157,7 @@ const server = http.createServer(async (req, res) => {
           pass: smtp.pass
         },
         tls: { rejectUnauthorized: false },
+        family: 4, // Force IPv4 to fix ENETUNREACH on Render
         connectionTimeout: 15000, // 15 seconds max to connect
         greetingTimeout: 15000,
         socketTimeout: 15000
