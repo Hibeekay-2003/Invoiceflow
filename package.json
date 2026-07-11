@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "nodemailer": "^9.0.3",
-    "puppeteer": "^25.3.0"
+    "otplib": "^13.4.1",
+    "puppeteer": "^25.3.0",
+    "qrcode-terminal": "^0.12.0"
   }
 }

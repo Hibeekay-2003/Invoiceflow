@@ -113,7 +113,7 @@ const server = http.createServer(async (req, res) => {
     return res.end();
   }
 
-  /* ── API: POST /api/login ── */
+  /* 🚀 API: POST /api/login 🚀 */
   if (urlPath === '/api/login' && req.method === 'POST') {
     const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
 
@@ -122,27 +122,25 @@ const server = http.createServer(async (req, res) => {
       return res.end(JSON.stringify({ error: 'Too many attempts. Try again later.' }));
     }
 
-    const chunks = [];
-    req.on('data', c => chunks.push(c));
+    let body = '';
+    req.on('data', chunk => body += chunk);
     req.on('end', () => {
-      let password;
       try {
-        ({ password } = JSON.parse(Buffer.concat(chunks).toString()));
-      } catch {
+        const { totpCode } = JSON.parse(body);
+        if (auth.checkTotp(totpCode)) {
+          auth.clearAttempts(ip);
+          const { token, expires } = auth.createSessionToken();
+          auth.setSessionCookie(res, token, expires);
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ success: true }));
+        } else {
+          auth.recordFailedAttempt(ip);
+          res.writeHead(401, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: 'Invalid authenticator code' }));
+        }
+      } catch (err) {
         res.writeHead(400, { 'Content-Type': 'application/json' });
-        return res.end(JSON.stringify({ error: 'Bad request' }));
-      }
-
-      if (auth.checkPassword(password)) {
-        auth.clearAttempts(ip);
-        const { token, expires } = auth.createSessionToken();
-        auth.setSessionCookie(res, token, expires);
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ success: true }));
-      } else {
-        auth.recordFailedAttempt(ip);
-        res.writeHead(401, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ error: 'Incorrect password' }));
+        res.end(JSON.stringify({ error: 'Bad request' }));
       }
     });
     return;
