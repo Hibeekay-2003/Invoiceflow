@@ -59,6 +59,10 @@
   <div class="sidebar-footer">
     <div class="company-mini" id="sidebar-company-name">Your Company</div>
     <div class="sidebar-version">InvoiceFlow v1.0</div>
+    <button class="btn btn-ghost btn-sm" id="logout-btn" style="width:100%;margin-top:10px;justify-content:center;" title="Sign out">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      <span>Log out</span>
+    </button>
   </div>
 </aside>
 
@@ -131,6 +135,12 @@
     window.db = firebase.firestore();
   </script>
 
+<script>
+  document.getElementById('logout-btn').addEventListener('click', async () => {
+    await fetch('/api/logout', { method: 'POST' });
+    window.location.href = '/login.html';
+  });
+</script>
 <script src="app.js"></script>
 
 </body>

@@ -11,6 +11,7 @@ const fs   = require('fs');
 const path = require('path');
 const os   = require('os');
 const nodemailer = require('nodemailer');
+const auth       = require('./auth');
 
 const PORT      = process.env.PORT || 7821;   // Railway injects PORT automatically
 const BASE      = __dirname;
@@ -100,6 +101,59 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'OPTIONS') { res.writeHead(204); res.end(); return; }
 
   const urlPath = new URL(req.url, `http://localhost`).pathname;
+
+  /* ── Auth gate ── */
+  const publicPaths = ['/login.html', '/api/login'];
+  if (!publicPaths.includes(urlPath) && !auth.isAuthenticated(req)) {
+    if (urlPath.startsWith('/api/')) {
+      res.writeHead(401, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ error: 'Unauthorized' }));
+    }
+    res.writeHead(302, { Location: `/login.html?next=${encodeURIComponent(urlPath)}` });
+    return res.end();
+  }
+
+  /* ── API: POST /api/login ── */
+  if (urlPath === '/api/login' && req.method === 'POST') {
+    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+
+    if (auth.isRateLimited(ip)) {
+      res.writeHead(429, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ error: 'Too many attempts. Try again later.' }));
+    }
+
+    const chunks = [];
+    req.on('data', c => chunks.push(c));
+    req.on('end', () => {
+      let password;
+      try {
+        ({ password } = JSON.parse(Buffer.concat(chunks).toString()));
+      } catch {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        return res.end(JSON.stringify({ error: 'Bad request' }));
+      }
+
+      if (auth.checkPassword(password)) {
+        auth.clearAttempts(ip);
+        const { token, expires } = auth.createSessionToken();
+        auth.setSessionCookie(res, token, expires);
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: true }));
+      } else {
+        auth.recordFailedAttempt(ip);
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Incorrect password' }));
+      }
+    });
+    return;
+  }
+
+  /* ── API: POST /api/logout ── */
+  if (urlPath === '/api/logout' && req.method === 'POST') {
+    auth.clearSessionCookie(res);
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    return res.end(JSON.stringify({ success: true }));
+  }
 
   /* ── API: GET /api/data ── */
   if (urlPath === '/api/data' && req.method === 'GET') {
